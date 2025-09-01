@@ -31,8 +31,7 @@
 </head>
 <body class="bg-yellow-50">
   <div id="root"></div>
-  <!-- type을 "text/babel"로 변경하고, data-type="module"을 추가하여 Babel이 모듈 시스템을 처리하도록 합니다. -->
-  <!-- src를 원본 .tsx 파일로 변경하여 Babel이 직접 변환하도록 합니다. -->
-  <script type="text/babel" data-type="module" src="./index.tsx"></script>
+  <!-- data-presets에 'typescript'를 추가하여 Babel이 TSX 문법을 올바르게 변환하도록 설정합니다. -->
+  <script type="text/babel" data-presets="react,typescript" data-type="module" src="./index.tsx"></script>
 </body>
 </html>
