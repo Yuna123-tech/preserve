@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Learn from './pages/Learn';
-import Explore from './pages/Explore';
-import Quiz from './pages/Quiz';
-import Videos from './pages/Videos';
-import ProtectHeritageGame from './pages/ProtectHeritageGame';
-import type { Page } from './types';
+import Header from './components/Header.tsx';
+import Footer from './components/Footer.tsx';
+import Home from './pages/Home.tsx';
+import Learn from './pages/Learn.tsx';
+import Explore from './pages/Explore.tsx';
+import Quiz from './pages/Quiz.tsx';
+import Videos from './pages/Videos.tsx';
+import ProtectHeritageGame from './pages/ProtectHeritageGame.tsx';
+import type { Page } from './types.ts';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { videoData } from '../constants';
+import { videoData } from '../constants.ts';
 
 const Videos: React.FC = () => {
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);

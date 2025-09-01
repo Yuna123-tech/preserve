@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { quizQuestions } from '../constants';
-import type { QuizQuestion } from '../types';
+import { quizQuestions } from '../constants.ts';
+import type { QuizQuestion } from '../types.ts';
 
 type QuizStatus = 'idle' | 'playing' | 'finished';
 type AnswerState = 'unanswered' | 'correct' | 'incorrect';

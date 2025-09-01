@@ -1,7 +1,7 @@
 
 import React from 'react';
-import Card from '../components/Card';
-import { heritageSites } from '../constants';
+import Card from '../components/Card.tsx';
+import { heritageSites } from '../constants.ts';
 
 const Explore: React.FC = () => {
   return (

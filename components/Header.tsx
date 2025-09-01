@@ -1,6 +1,6 @@
 import React from 'react';
-import { MascotIcon } from './icons/MascotIcon';
-import type { Page } from '../types';
+import { MascotIcon } from './icons/MascotIcon.tsx';
+import type { Page } from '../types.ts';
 
 interface HeaderProps {
   setCurrentPage: (page: Page) => void;

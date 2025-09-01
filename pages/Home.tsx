@@ -1,11 +1,11 @@
 import React from 'react';
-import type { Page } from '../types';
-import { MascotIcon } from '../components/icons/MascotIcon';
-import { LearnIcon } from '../components/icons/LearnIcon';
-import { HeritageIcon } from '../components/icons/HeritageIcon';
-import { GameIcon } from '../components/icons/GameIcon';
-import { VideoIcon } from '../components/icons/VideoIcon';
-import { ConservationIcon } from '../components/icons/ConservationIcon';
+import type { Page } from '../types.ts';
+import { MascotIcon } from '../components/icons/MascotIcon.tsx';
+import { LearnIcon } from '../components/icons/LearnIcon.tsx';
+import { HeritageIcon } from '../components/icons/HeritageIcon.tsx';
+import { GameIcon } from '../components/icons/GameIcon.tsx';
+import { VideoIcon } from '../components/icons/VideoIcon.tsx';
+import { ConservationIcon } from '../components/icons/ConservationIcon.tsx';
 
 interface HomeProps {
   setCurrentPage: (page: Page) => void;
@@ -58,7 +58,7 @@ const Home: React.FC<HomeProps> = ({ setCurrentPage }) => {
         />
         <MenuCard 
           title="지킴이 게임" 
-          description="올바른 관람 예절을 배워요." 
+          description="위협에서 유산을 지켜주세요!" 
           icon={<ConservationIcon className="w-24 h-24" />}
           onClick={() => setCurrentPage('protect-heritage-game')}
           bgColor="bg-teal-500"
