@@ -17,6 +17,8 @@
       font-family: 'Dongle', sans-serif;
     }
   </style>
+<!-- Babel 추가: 브라우저가 JSX와 최신 자바스크립트 문법을 이해할 수 있도록 합니다. -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="importmap">
 {
   "imports": {
@@ -29,6 +31,8 @@
 </head>
 <body class="bg-yellow-50">
   <div id="root"></div>
-  <script type="module" src="./index.js"></script>
+  <!-- type을 "text/babel"로 변경하고, data-type="module"을 추가하여 Babel이 모듈 시스템을 처리하도록 합니다. -->
+  <!-- src를 원본 .tsx 파일로 변경하여 Babel이 직접 변환하도록 합니다. -->
+  <script type="text/babel" data-type="module" src="./index.tsx"></script>
 </body>
 </html>
