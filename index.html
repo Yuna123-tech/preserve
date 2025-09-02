@@ -1,66 +1,673 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>지켜줘! 우리의 소중한 국가유산</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23FFD18B'/><circle cx='37' cy='46' r='6' fill='white'/><circle cx='63' cy='46' r='6' fill='white'/><circle cx='38' cy='46' r='3' fill='black'/><circle cx='62' cy='46' r='3' fill='black'/><path d='M46 59 L54 59 C54 59 52 63 50 63 C48 63 46 59 46 59 Z' fill='white'/></svg>">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Dongle:wght@400;700&display=swap" rel="stylesheet">
-  
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지켜줘! 우리의 소중한 국가유산</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Dongle:wght@400;700&display=swap');
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(-45deg, #fff9e0, #fff0c7, #ffe6b3, #ffd18b);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+            color: #4b3832;
+        }
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Dongle', sans-serif;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .main-card {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 2rem;
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+            margin-top: 5rem;
+        }
+        .menu-button {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 1rem;
+            font-display: 'Dongle', sans-serif;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .menu-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        .menu-button svg {
+            width: 4rem;
+            height: 4rem;
+            margin-bottom: 0.5rem;
+        }
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-out forwards;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .quiz-option {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: 2px solid #e7b165;
+            background-color: #fff;
+            color: #4b3832;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .quiz-option:hover {
+            background-color: #f7e1b5;
+        }
+        .quiz-option.correct {
+            background-color: #92d378;
+            color: white;
+            border-color: #72b25b;
+        }
+        .quiz-option.incorrect {
+            background-color: #e78282;
+            color: white;
+            border-color: #c76a6a;
+        }
 
-  <style>
-    @keyframes gradient-animation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    body {
-      font-family: 'Noto Sans KR', sans-serif;
-      background: linear-gradient(-45deg, #fffbe0, #fff0c7, #ffe6b3, #ffd18b);
-      background-size: 400% 400%;
-      animation: gradient-animation 15s ease infinite;
-    }
-    h1, h2, h3, h4, h5, h6, .font-display {
-      font-family: 'Dongle', sans-serif;
-    }
-    .shadow-inner-lg {
-        box-shadow: inset 0 4px 15px 0 rgba(0, 0, 0, 0.08);
-    }
-    @keyframes fade-in {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in {
-        animation: fade-in 0.5s ease-out forwards;
-    }
-     @keyframes fade-out-up {
-        from { opacity: 1; transform: translateY(0); }
-        to { opacity: 0; transform: translateY(-20px); }
-    }
-    .animate-fade-out-up {
-        animation: fade-out-up 1s ease-out forwards;
-    }
-  </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.1.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-    "react/": "https://aistudiocdn.com/react@^19.1.1/",
-    "vite": "https://aistudiocdn.com/vite@^7.1.4",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.0.2"
-  }
-}
-</script>
+        /* Card Matching Game Specific Styles */
+        #card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        .card-container {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .card-container.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: #fff;
+        }
+        .card-front {
+            background-color: #66b677; /* Green for card back */
+            transform: rotateY(0deg);
+        }
+        .card-back {
+            background-color: #fff;
+            color: #4b3832;
+            font-size: 2.5rem;
+            transform: rotateY(180deg);
+        }
+        .card-container.matched .card-inner {
+            box-shadow: 0 0 10px 5px #92d378;
+            transform: scale(1.05);
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        #matching-game-status {
+            font-size: 1.5rem;
+            font-weight: bold;
+            height: 2rem;
+        }
+    </style>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel" data-presets="react,typescript" src="./index.tsx"></script>
+    <div id="app" class="container">
+        <!-- Header -->
+        <header class="w-full flex justify-between items-center py-4 px-8 bg-[#ffecb8] rounded-full shadow-md fixed top-4 z-50">
+            <div class="flex items-center text-3xl font-display">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-12 h-12 mr-2">
+                    <path fill="#e7b165" d="M50 0 A50 50 0 0 1 100 50 A50 50 0 0 1 50 100 A50 50 0 0 1 0 50 A50 50 0 0 1 50 0z"/>
+                    <path d="M40 35a10 10 0 1 0 20 0a10 10 0 1 0 -20 0z" fill="#fff"/>
+                    <path d="M30 65a10 10 0 1 0 20 0a10 10 0 1 0 -20 0z" fill="#fff"/>
+                    <path d="M50 65a10 10 0 1 0 20 0a10 10 0 1 0 -20 0z" fill="#fff"/>
+                </svg>
+                지켜줘! 우리의 소중한 국가유산
+            </div>
+            <nav class="flex space-x-4 font-bold">
+                <a href="#" onclick="showScreen('main-screen')" class="hover:underline">처음으로</a>
+                <a href="#" onclick="showScreen('learn-more-screen')" class="hover:underline">알아보기</a>
+                <a href="#" onclick="showScreen('game-menu-screen')" class="hover:underline">지킴이 게임</a>
+                <a href="#" onclick="showScreen('quiz-screen')" class="hover:underline">도전! 퀴즈</a>
+            </nav>
+        </header>
+
+        <!-- Main Screen -->
+        <div id="main-screen" class="w-full h-full flex flex-col justify-center items-center">
+            <div id="intro-popup" class="main-card animate-fade-in p-8 relative">
+                <h1 class="text-6xl font-display mb-4">지켜줘! 우리의 소중한 국가유산</h1>
+                <div class="bg-gray-200 rounded-lg p-6 my-6 text-center text-xl relative overflow-hidden">
+                    <div class="relative bg-white bg-opacity-80 p-6 rounded-lg shadow-inner-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-24 h-24 mx-auto mb-4">
+                            <circle cx="50" cy="50" r="45" fill="#A3B5C7"/>
+                            <path d="M35 40c0-5 10-5 10 0c0 5-10 5-10 0z" fill="#fff"/>
+                            <path d="M55 40c0-5 10-5 10 0c0 5-10 5-10 0z" fill="#fff"/>
+                            <path d="M30 65c0-5 5-5 5 0c0 5-5 5-5 0z" fill="#fff"/>
+                            <path d="M50 65c0-5 5-5 5 0c0 5-5 5-5 0z" fill="#fff"/>
+                        </svg>
+                        <p class="font-display text-4xl mb-2">안녕, 나는 국가유산 지킴이 호야!</p>
+                        <p>우리나라의 아름다운 국가유산에 대해 함께 배우고, 지키는 방법을 알아보자! 신나는 탐험을 떠날 준비 됐니?</p>
+                        <button onclick="hidePopup()" class="mt-4 bg-[#e7b165] hover:bg-[#d49e52] text-white font-bold py-2 px-6 rounded-full transition duration-300">
+                            시작!
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mt-8">
+                    <button onclick="showScreen('learn-more-screen')" class="menu-button bg-[#81b2f7] hover:bg-[#6e9be1] text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        알아보기
+                    </button>
+                    <button onclick="showScreen('game-menu-screen')" class="menu-button bg-[#66b677] hover:bg-[#59a86a] text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001 1h2a1 1 0 001-1v-4a1 1 0 00-1-1h-2a1 1 0 00-1 1v4zm7-6h.01" />
+                        </svg>
+                        지킴이 게임
+                    </button>
+                    <button onclick="showScreen('quiz-screen')" class="menu-button bg-[#e78282] hover:bg-[#c76a6a] text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9v3m-3-3h6a2 2 0 002-2v-2a2 2 0 00-2-2h-6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                        </svg>
+                        도전! 퀴즈
+                    </button>
+                    <button class="menu-button bg-[#e7b165] hover:bg-[#d49e52] text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.19a4.5 4.5 0 014.183 4.183M14.752 11.19l-3.321 3.321m0 0l3.321 3.321M14.752 11.19L11.431 14.511m0 0l-3.321 3.321m0 0l3.321 3.321m-3.321-3.321h-2a2 2 0 01-2-2v-2a2 2 0 012-2h2m-6 9v-2a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2zm-3-4v-2a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                        <span class="text-sm">탐험하기</span>
+                    </button>
+                    <button class="menu-button bg-[#c9a7e6] hover:bg-[#b595d0] text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M4 14v6a2 2 0 002 2h12a2 2 0 002-2v-6m-6-4l-6-6-6 6M12 2v10" />
+                        </svg>
+                        <span class="text-sm">영상 보기</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learn More Screen -->
+        <div id="learn-more-screen" class="hidden w-full animate-fade-in">
+            <div class="main-card">
+                <h2 class="text-5xl font-display mb-4">국가유산 알아보기</h2>
+                <div class="text-left space-y-4">
+                    <h3 class="text-2xl font-bold">국가유산이란?</h3>
+                    <p>국가유산은 우리 조상들이 남겨주신 소중한 보물이에요. 건물, 물건, 자연, 심지어 노래나 춤처럼 눈에 보이지 않는 것들도 모두 포함돼요. 이 유산들은 우리가 어떻게 살아왔고, 무엇을 중요하게 여겼는지 알려주는 중요한 자료랍니다.</p>
+                    <h3 class="text-2xl font-bold">왜 지켜야 할까?</h3>
+                    <p>국가유산은 우리 역사의 증거이자, 우리가 누구인지 알려주는 거울과 같아요. 이 유산들을 잘 지키고 가꾸어서, 우리 다음 세대에게도 물려주어야 해요. 그래야 우리 역사가 끊기지 않고 계속 이어질 수 있답니다.</p>
+                    <button onclick="showScreen('main-screen')" class="mt-4 bg-[#e7b165] hover:bg-[#d49e52] text-white font-bold py-2 px-6 rounded-full transition duration-300">
+                        처음으로 돌아가기
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Menu Screen -->
+        <div id="game-menu-screen" class="hidden w-full animate-fade-in">
+            <div class="main-card">
+                <h2 class="text-5xl font-display mb-4">지킴이 게임</h2>
+                <p class="text-lg font-display mb-6">원하는 게임을 선택해서 문화유산을 지켜주세요!</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="startCleaningGame()" class="menu-button bg-[#e7b165] hover:bg-[#d49e52] text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10V4.5a2.5 2.5 0 00-5 0V10a2.5 2.5 0 01-5 0V4.5a2.5 2.5 0 00-5 0V10" />
+                        </svg>
+                        <span class="text-sm">먼지 털이 게임</span>
+                    </button>
+                     <button onclick="startMatchingGame()" class="menu-button bg-[#81b2f7] hover:bg-[#6e9be1] text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h2.5a2 2 0 002-2v-2m0 0V9m0 5h5m-5 5v5m0-5h5a2 2 0 002-2v-2" />
+                        </svg>
+                        <span class="text-sm">짝맞추기 게임</span>
+                    </button>
+                </div>
+                <button onclick="showScreen('main-screen')" class="mt-4 bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-full transition duration-300">
+                    처음으로 돌아가기
+                </button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="hidden w-full animate-fade-in">
+            <div class="main-card">
+                <h2 class="text-5xl font-display mb-4">도전! 퀴즈</h2>
+                <div id="quiz-content">
+                    <div id="quiz-question" class="text-2xl font-bold mb-4"></div>
+                    <div id="quiz-options" class="flex flex-col space-y-2"></div>
+                </div>
+                <div id="quiz-result" class="hidden mt-4 text-center">
+                    <p id="result-text" class="text-2xl font-bold mb-2"></p>
+                    <button onclick="nextQuiz()" class="bg-[#e7b165] hover:bg-[#d49e52] text-white font-bold py-2 px-6 rounded-full transition duration-300 hidden">
+                        다음 문제
+                    </button>
+                    <button onclick="showScreen('main-screen')" class="mt-4 bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-full transition duration-300">
+                        처음으로 돌아가기
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cleaning Game Screen -->
+        <div id="cleaning-game-screen" class="hidden w-full animate-fade-in">
+            <h2 id="cleaning-stage-title" class="text-4xl font-display mb-4 text-center"></h2>
+            <div id="cleaning-game-container" class="relative w-full aspect-video bg-white rounded-lg shadow-lg mb-4 cursor-pointer">
+                <canvas id="cleaning-game-canvas" class="w-full h-full"></canvas>
+                <div id="cleaning-text-overlay" class="hidden text-overlay animate-fade-in"></div>
+            </div>
+            <div class="flex justify-center items-center mt-4 w-full max-w-sm">
+                <button onclick="resetCleaningGame()" class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-full transition duration-300 mr-2">
+                    다시 하기
+                </button>
+                <button id="cleaning-next-stage-btn" onclick="nextCleaningStage()" class="bg-[#e7b165] hover:bg-[#d49e52] text-white font-bold py-2 px-4 rounded-full transition duration-300 hidden">
+                    다음 단계
+                </button>
+            </div>
+            <p id="cleaning-description" class="text-center mt-4 text-gray-600 font-display text-lg"></p>
+        </div>
+
+        <!-- Matching Game Screen -->
+        <div id="matching-game-screen" class="hidden w-full animate-fade-in main-card flex flex-col items-center">
+            <h2 class="text-5xl font-display mb-4">짝맞추기 게임</h2>
+            <p id="matching-game-status" class="text-lg mb-4 text-center"></p>
+            <div id="card-grid" class="w-full max-w-lg mb-4"></div>
+            <button onclick="startMatchingGame()" class="bg-[#e7b165] hover:bg-[#d49e52] text-white font-bold py-2 px-6 rounded-full transition duration-300 mt-4">
+                다시 시작
+            </button>
+            <button onclick="showScreen('game-menu-screen')" class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-full transition duration-300 mt-4">
+                게임 메뉴로 돌아가기
+            </button>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="hidden main-card animate-fade-in">
+            <h2 class="text-5xl font-display mb-4">미션 성공! 🎉</h2>
+            <p id="result-message" class="text-xl mb-4 font-display"></p>
+            <button onclick="showScreen('main-screen')" class="bg-[#e7b165] hover:bg-[#d49e52] text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300">
+                처음으로
+            </button>
+            <a id="learn-more-link" href="#" target="_blank" class="block mt-4 text-[#e7b165] hover:underline">더 알아보기</a>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "다음 중 우리나라의 국보 1호는 무엇일까요?",
+                options: ["경복궁", "숭례문", "석굴암", "해인사 팔만대장경판"],
+                answer: "숭례문"
+            },
+            {
+                question: "신라 시대의 천문 관측소로, 돌로 만들어진 국가유산은 무엇일까요?",
+                options: ["불국사", "첨성대", "석굴암", "다보탑"],
+                answer: "첨성대"
+            },
+            {
+                question: "우리나라의 '한글'을 만든 사람은 누구일까요?",
+                options: ["세종대왕", "장영실", "이순신", "정약용"],
+                answer: "세종대왕"
+            }
+        ];
+        let currentQuizIndex = 0;
+        
+        const cleaningGameStages = [
+            {
+                title: "숭례문 청소",
+                description: "숭례문의 묵은 때를 깨끗하게 닦아내요.",
+                cleanColor: "#C0C0C0",
+                dirtyColor: "#4B3832",
+                infoLink: "https://ko.wikipedia.org/wiki/숭례문"
+            },
+            {
+                title: "첨성대 청소",
+                description: "먼지 쌓인 첨성대를 닦아 별이 잘 보이게 해줘요.",
+                cleanColor: "#90B888",
+                dirtyColor: "#5E6A5B",
+                infoLink: "https://ko.wikipedia.org/wiki/첨성대"
+            }
+        ];
+        let currentCleaningStage = 0;
+        let cleaningCanvas, cleaningCtx, isDrawing = false;
+
+        const matchingGameCards = ['🏯', '🏺', '👑', '📜', '🪨', '🔔', '🏺', '🏯', '📜', '🪨', '👑', '🔔'];
+        let shuffledCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let canFlip = true;
+        
+        // UI Elements
+        const mainScreen = document.getElementById('main-screen');
+        const learnMoreScreen = document.getElementById('learn-more-screen');
+        const gameMenuScreen = document.getElementById('game-menu-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const cleaningGameScreen = document.getElementById('cleaning-game-screen');
+        const matchingGameScreen = document.getElementById('matching-game-screen');
+        const resultScreen = document.getElementById('result-screen');
+        
+        const quizQuestion = document.getElementById('quiz-question');
+        const quizOptions = document.getElementById('quiz-options');
+        const quizResult = document.getElementById('quiz-result');
+        const resultText = document.getElementById('result-text');
+        const nextQuizBtn = document.getElementById('next-quiz-btn');
+        
+        const cleaningStageTitle = document.getElementById('cleaning-stage-title');
+        const cleaningDescriptionElement = document.getElementById('cleaning-description');
+        const cleaningNextStageBtn = document.getElementById('cleaning-next-stage-btn');
+        const resultMessage = document.getElementById('result-message');
+        const learnMoreLink = document.getElementById('learn-more-link');
+        const cleaningGameContainer = document.getElementById('cleaning-game-container');
+        const cleaningTextOverlay = document.getElementById('cleaning-text-overlay');
+        const introPopup = document.getElementById('intro-popup');
+
+        const cardGrid = document.getElementById('card-grid');
+        const matchingGameStatus = document.getElementById('matching-game-status');
+        
+        function hidePopup() {
+            introPopup.querySelector('div').style.display = 'none';
+        }
+
+        function showScreen(screenId) {
+            const screens = [mainScreen, learnMoreScreen, gameMenuScreen, quizScreen, cleaningGameScreen, matchingGameScreen, resultScreen];
+            screens.forEach(screen => {
+                if (screen.id === screenId) {
+                    screen.classList.remove('hidden');
+                    screen.classList.add('animate-fade-in');
+                } else {
+                    screen.classList.add('hidden');
+                }
+            });
+            if(screenId === 'quiz-screen') {
+                loadQuiz();
+            }
+        }
+        
+        // Quiz Functions
+        function loadQuiz() {
+            if (currentQuizIndex >= quizData.length) {
+                quizResult.classList.remove('hidden');
+                resultText.textContent = "모든 퀴즈를 풀었어요! 훌륭해요!";
+                nextQuizBtn.classList.add('hidden');
+                return;
+            }
+            
+            quizResult.classList.add('hidden');
+            const quiz = quizData[currentQuizIndex];
+            quizQuestion.textContent = quiz.question;
+            quizOptions.innerHTML = '';
+            
+            quiz.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'quiz-option';
+                button.onclick = () => checkQuiz(option, quiz.answer);
+                quizOptions.appendChild(button);
+            });
+        }
+        
+        function checkQuiz(selectedOption, correctAnswer) {
+            const allOptions = quizOptions.querySelectorAll('.quiz-option');
+            allOptions.forEach(option => {
+                if (option.textContent === correctAnswer) {
+                    option.classList.add('correct');
+                } else {
+                    option.classList.add('incorrect');
+                }
+                option.disabled = true;
+            });
+            
+            if (selectedOption === correctAnswer) {
+                resultText.textContent = "정답이에요! 정말 잘했어요!";
+            } else {
+                resultText.textContent = `틀렸어요. 정답은 '${correctAnswer}'입니다.`;
+            }
+            quizResult.classList.remove('hidden');
+            nextQuizBtn.classList.remove('hidden');
+        }
+
+        function nextQuiz() {
+            currentQuizIndex++;
+            loadQuiz();
+        }
+
+        // Cleaning Game Functions
+        function startCleaningGame() {
+            currentCleaningStage = 0;
+            loadCleaningStage(currentCleaningStage);
+        }
+
+        function loadCleaningStage(index) {
+            if (index >= cleaningGameStages.length) {
+                showScreen('result-screen');
+                resultMessage.textContent = "모든 문화유산을 깨끗하게 복원했어요! 정말 훌륭해요!";
+                learnMoreLink.href = "https://www.cha.go.kr/html/HtmlPage.do?pg=/heritage/restoration/restoration_01_01.jsp&mn=KR_02_01_01";
+                learnMoreLink.textContent = "문화재 복원에 대해 더 알아보기";
+                return;
+            }
+            
+            showScreen('cleaning-game-screen');
+            const stage = cleaningGameStages[index];
+            cleaningStageTitle.textContent = stage.title;
+            cleaningDescriptionElement.textContent = stage.description;
+            cleaningNextStageBtn.classList.add('hidden');
+
+            cleaningCanvas = document.getElementById('cleaning-game-canvas');
+            cleaningCtx = cleaningCanvas.getContext('2d', { willReadFrequently: true });
+            
+            cleaningCanvas.width = cleaningGameContainer.clientWidth;
+            cleaningCanvas.height = cleaningGameContainer.clientWidth * (3 / 4);
+
+            cleaningCtx.fillStyle = stage.cleanColor;
+            cleaningCtx.fillRect(0, 0, cleaningCanvas.width, cleaningCanvas.height);
+            
+            cleaningCtx.fillStyle = stage.dirtyColor;
+            cleaningCtx.fillRect(0, 0, cleaningCanvas.width, cleaningCanvas.height);
+            
+            addCleaningEventListeners();
+            
+            cleaningTextOverlay.textContent = "화면을 문질러서 문화유산을 깨끗하게 만들어봐요!";
+            cleaningTextOverlay.classList.remove('hidden');
+            setTimeout(() => cleaningTextOverlay.classList.add('hidden'), 5000);
+        }
+
+        function addCleaningEventListeners() {
+            const getCoords = (e) => {
+                const rect = cleaningCanvas.getBoundingClientRect();
+                return {
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top,
+                    type: e.type.includes('touch') ? 'touch' : 'mouse'
+                };
+            };
+            
+            const startDraw = (e) => {
+                e.preventDefault();
+                isDrawing = true;
+                draw(e);
+            };
+
+            const endDraw = () => {
+                isDrawing = false;
+                checkCompletion();
+            };
+
+            const draw = (e) => {
+                if (!isDrawing) return;
+                e.preventDefault();
+                
+                const coords = getCoords(e.type.includes('touch') ? e.touches[0] : e);
+                const brushSize = 50;
+
+                cleaningCtx.globalCompositeOperation = 'destination-out';
+                cleaningCtx.beginPath();
+                cleaningCtx.arc(coords.x, coords.y, brushSize / 2, 0, Math.PI * 2);
+                cleaningCtx.fill();
+            };
+
+            cleaningCanvas.addEventListener('mousedown', startDraw);
+            cleaningCanvas.addEventListener('mouseup', endDraw);
+            cleaningCanvas.addEventListener('mouseleave', endDraw);
+            cleaningCanvas.addEventListener('mousemove', draw);
+
+            cleaningCanvas.addEventListener('touchstart', startDraw, { passive: false });
+            cleaningCanvas.addEventListener('touchend', endDraw);
+            cleaningCanvas.addEventListener('touchcancel', endDraw);
+            cleaningCanvas.addEventListener('touchmove', draw, { passive: false });
+        }
+        
+        function checkCompletion() {
+            const totalPixels = cleaningCanvas.width * cleaningCanvas.height;
+            const dirtyData = cleaningCtx.getImageData(0, 0, cleaningCanvas.width, cleaningCanvas.height);
+            let alphaPixels = 0;
+
+            for (let i = 0; i < dirtyData.data.length; i += 4) {
+                if (dirtyData.data[i + 3] === 0) {
+                    alphaPixels++;
+                }
+            }
+
+            const completionRate = (alphaPixels / totalPixels) * 100;
+
+            if (completionRate > 60) {
+                isDrawing = false;
+                cleaningCtx.globalCompositeOperation = 'source-over';
+                cleaningTextOverlay.textContent = "와, 정말 깨끗해졌어요! 복원 성공!";
+                cleaningTextOverlay.classList.remove('hidden');
+                cleaningNextStageBtn.classList.remove('hidden');
+                
+                cleaningCanvas.replaceWith(cleaningCanvas.cloneNode(true));
+            }
+        }
+
+        function resetCleaningGame() {
+            loadCleaningStage(currentCleaningStage);
+        }
+
+        function nextCleaningStage() {
+            currentCleaningStage++;
+            loadCleaningStage(currentCleaningStage);
+        }
+
+        // Matching Game Functions
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function startMatchingGame() {
+            showScreen('matching-game-screen');
+            shuffledCards = shuffle([...matchingGameCards]);
+            flippedCards = [];
+            matchedPairs = 0;
+            canFlip = true;
+            matchingGameStatus.textContent = '카드를 뒤집어 짝을 맞춰보세요!';
+            cardGrid.innerHTML = '';
+            
+            shuffledCards.forEach((card, index) => {
+                const cardContainer = document.createElement('div');
+                cardContainer.className = 'card-container aspect-square';
+                cardContainer.dataset.cardIndex = index;
+                cardContainer.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-front">?</div>
+                        <div class="card-back">${card}</div>
+                    </div>
+                `;
+                cardContainer.addEventListener('click', () => flipCard(cardContainer, card, index));
+                cardGrid.appendChild(cardContainer);
+            });
+        }
+
+        function flipCard(cardElement, cardValue, index) {
+            if (!canFlip || flippedCards.includes(cardElement) || cardElement.classList.contains('matched')) {
+                return;
+            }
+            
+            cardElement.classList.add('flipped');
+            flippedCards.push(cardElement);
+
+            if (flippedCards.length === 2) {
+                canFlip = false;
+                const [firstCard, secondCard] = flippedCards;
+                const firstCardValue = firstCard.querySelector('.card-back').textContent;
+                const secondCardValue = secondCard.querySelector('.card-back').textContent;
+
+                if (firstCardValue === secondCardValue) {
+                    // Match found
+                    setTimeout(() => {
+                        firstCard.classList.add('matched');
+                        secondCard.classList.add('matched');
+                        matchedPairs++;
+                        flippedCards = [];
+                        canFlip = true;
+                        if (matchedPairs === matchingGameCards.length / 2) {
+                            matchingGameStatus.textContent = '🎉 미션 성공! 🎉';
+                        }
+                    }, 1000);
+                } else {
+                    // No match
+                    setTimeout(() => {
+                        firstCard.classList.remove('flipped');
+                        secondCard.classList.remove('flipped');
+                        flippedCards = [];
+                        canFlip = true;
+                    }, 1000);
+                }
+            }
+        }
+    </script>
 </body>
 </html>
